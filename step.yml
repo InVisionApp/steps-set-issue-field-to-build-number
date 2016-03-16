@@ -77,4 +77,10 @@ inputs:
       summary: ""
       description: ""
       is_required: false
+  - jira_tag_branch: "$IN_JIRA_TAG_BRANCH"
+    opts:
+      title: "Add tag to branch"
+      summary: ""
+      description: ""
+      is_required: false
 

@@ -11,6 +11,7 @@ import subprocess
 #Constants#
 ###########
 
+
 username=os.environ['jira_username']
 password=os.environ['jira_password']
 searchJQL=os.environ['jira_search_JQL']
@@ -22,6 +23,7 @@ testTicket=os.environ.get('jira_test_ticket', None)
 ignoreNotCommited=os.environ.get('jira_ignore_not_commited', 'False')
 dryRun=os.environ.get('jira_dry_run', 'False')
 testTag=os.environ.get('jira_test_tag', None)
+tagBranch=os.environ.get('jira_tag_branch', 'False')
 
 searchPath='/rest/api/latest/search'
 searchQuery='fields=id,key,%s&maxResults=50' % filedUpdate
@@ -144,10 +146,22 @@ def main():
                 print "  Updated ticket %s" % key
             else:
                 print "  Failed update for ticket %s" % key
-    
+                
+        if tagBranch:
+            oldTags = run("git ls-remote origin refs/tags/%s" % tag)
+            if tag in oldTags:
+                print "  Already Tagged branch"
+            else:
+                branch=run("git rev-parse --abbrev-ref HEAD")
+                print "  Tagging branch: %s" % branch
+                run("git tag %s" % tag)
+                run("git push origin %s tag %s" % (branch, tag))
+
     print "  Done!"
             
 ignoreNotCommited = str2bool(ignoreNotCommited)
 dryRun = str2bool(dryRun)
+tagBranch = str2bool(tagBranch)
 
 main()
+
