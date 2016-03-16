@@ -141,9 +141,9 @@ def main():
         for key in keys:
             result = updateTicketWithTag(key, tag)
             if result:
-                print "  Updated ticket %s", key
+                print "  Updated ticket %s" % key
             else:
-                print "  Failed update for ticket %s", key
+                print "  Failed update for ticket %s" % key
     
     print "  Done!"
             
