@@ -1,0 +1,80 @@
+title: "Set issue field to build number"
+summary: Set the jira tickets to the have the build number
+description: |-
+  Set the jira tickets to the have the build number
+website: https://github.com/InVisionApp/steps-set-issue-field-to-build-number
+source_code_url: https://github.com/InVisionApp/steps-set-issue-field-to-build-number
+support_url: https://github.com/InVisionApp/steps-set-issue-field-to-build-number/issues
+host_os_tags:
+  - "osx-10.10"
+project_type_tags:
+  - ios
+type_tags:
+  - build
+  - xcode
+dependencies:
+  - manager: _
+    name: xcode
+run_if: ".IsCI"
+inputs:
+  - jira_host: "$IN_JIRA_HOST"
+    opts:
+      title: "JIRA host"
+      summary: ""
+      description: ""
+      is_required: true
+  - jira_username: "$IN_JIRA_USERNAME"
+    opts:
+      title: "JIRA username"
+      summary: ""
+      description: ""
+      is_required: true
+  - jira_password: "$IN_JIRA_PASSWORD"
+    opts:
+      title: "JIRA password"
+      summary: ""
+      description: ""
+      is_required: true
+  - jira_search_JQL: "$IN_JIRA_SEARCH_JQL"
+    opts:
+      title: "JIRA search JQL"
+      summary: ""
+      description: ""
+      is_required: true
+  - jira_filed_to_update: "$IN_JIRA_FIELD_TO_UPDATE"
+    opts:
+      title: "JIRA field to add to"
+      summary: ""
+      description: ""
+      is_required: true
+  - jira_plist_path: "$IN_JIRA_PLIST_PATH"
+    opts:
+      title: "Path to plist"
+      summary: ""
+      description: ""
+      is_required: true
+  - jira_test_ticket: "$IN_JIRA_TEST_TICKET"
+    opts:
+      title: "JIRA field to add to"
+      summary: ""
+      description: ""
+      is_required: false
+  - jira_test_tag: "$IN_JIRA_TEST_TAG"
+    opts:
+      title: "JIRA test tag"
+      summary: ""
+      description: ""
+      is_required: false
+  - jira_ignore_not_commited: "$IN_JIRA_IGNORE_NOT_COMMITED"
+    opts:
+      title: "Ignore no commit tickets"
+      summary: "If the ticket has no commits in the repo it will be ignored unless this is true"
+      description: ""
+      is_required: false
+  - jira_dry_run: "$IN_JIRA_DRY_RUN"
+    opts:
+      title: "JIRA do not update JIRA"
+      summary: ""
+      description: ""
+      is_required: false
+
