@@ -92,7 +92,7 @@ def getIssues():
 def updateTicketWithTag(ticket, tag):
     data={ "update": { filedUpdate: [ {"add": tag} ] } }
     url='%s%s%s' %(host, updatePath,ticket)
-    requestURL(url, data, 'PUT', False, False)
+    return requestURL(url, data, 'PUT', False, False)
 
 def main():
     
@@ -128,12 +128,12 @@ def main():
             keys.append(key)
             
     if len(alreadyUpdatedKeys) > 0:
-        print "  Already updated tickets:\n%s" % alreadyUpdatedKeys
+        print "  Already updated tickets:\n    %s" % alreadyUpdatedKeys
     
     if len(noCommitKeys) > 0:
-        print "  Not commited tickets:\n%s" % noCommitKeys
+        print "  Not commited tickets:\n     %s" % noCommitKeys
     
-    print "  Tickets to be updated:\n%s" % keys
+    print "  Tickets to be updated:\n     %s" % keys
     
     if dryRun:
         print "  Dry run"
