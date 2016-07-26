@@ -117,7 +117,11 @@ def main():
     
     for issue in issues:
         key = issue['key']
-        tags = issue['fields'][filedUpdate]
+        fields = issue.get('fields')
+        if fields is None:
+            continue
+        
+        tags = fields[filedUpdate]
         
         if testTicket and key != testTicket:
             continue
