@@ -117,7 +117,7 @@ def main():
     
     for issue in issues:
         key = issue['key']
-        fields = issue.get('fields')
+        fields = issue.get('fields', None)
         if fields is None:
             continue
         
