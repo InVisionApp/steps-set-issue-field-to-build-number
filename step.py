@@ -99,6 +99,7 @@ def updateTicketWithTag(ticket, tag):
 def main():
     
     gitLog = run('git log --pretty=oneline --abbrev-commit --since=2.weeks')
+    gitLog += run('git submodule foreach --quiet "git log --pretty=oneline --abbrev-commit --since=2.weeks --submodule"')
     issues = getIssues()
 
     if testTag:
