@@ -40,11 +40,14 @@ def str2bool(v):
 def encodeUserData(user, password):
     return "Basic " + (user + ":" + password).encode("base64").rstrip()
 
-def run(cmd, debug=False):
+def run(cmd, debug=False, params=None):
     if debug:
         print cmd
     
-    process = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE)
+    items = cmd.split()
+    if params is not None:
+        items.extend(params)
+    process = subprocess.Popen(items, stdout=subprocess.PIPE)
     output = process.communicate()[0]
     
     if debug:
@@ -99,7 +102,7 @@ def updateTicketWithTag(ticket, tag):
 def main():
     
     gitLog = run('git log --pretty=oneline --abbrev-commit --since=2.weeks')
-    gitLog += run('git submodule foreach --quiet "git log --pretty=oneline --abbrev-commit --since=2.weeks --submodule"')
+    gitLog += run('git submodule foreach --quiet', params=["git log --pretty=oneline --abbrev-commit --since=2.weeks --submodule"])
     issues = getIssues()
 
     if testTag:
