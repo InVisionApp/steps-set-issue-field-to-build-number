@@ -103,6 +103,7 @@ def main():
     
     gitLog = run('git log --pretty=oneline --abbrev-commit --since=2.weeks')
     gitLog += run('git submodule foreach --quiet', params=["git log --pretty=oneline --abbrev-commit --since=2.weeks --submodule"])
+    gitLog = gitLog.decode('utf-8').strip()
     issues = getIssues()
 
     if testTag:
@@ -121,6 +122,7 @@ def main():
     
     for issue in issues:
         key = issue['key']
+        key = key.decode('utf-8').strip()
         fields = issue.get('fields', None)
         if fields is None:
             continue
